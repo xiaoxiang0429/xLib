@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="XSpinner">
+        <attr
+            name="arrowTint"
+            format="color" />
+        <attr
+            name="hideArrow"
+            format="boolean" />
+        <attr
+            name="arrowDrawable"
+            format="reference|color" />
+        <attr
+            name="dropDownListPaddingBottom"
+            format="dimension" />
+        <attr
+            name="backgroundSelector"
+            format="integer" />
+        <attr
+            name="textTint"
+            format="color" />
+        <attr name="popupTextAlignment" />
+        <attr
+            name="entries"
+            format="reference" />
+    </declare-styleable>
+</resources>
