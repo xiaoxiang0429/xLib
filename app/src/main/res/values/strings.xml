@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">XLib</string>
+
+
+    <string-array name="testEntries">
+        <item>java</item>
+        <item>kotlin</item>
+        <item>c</item>
+        <item>c++</item>
+    </string-array>
 </resources>

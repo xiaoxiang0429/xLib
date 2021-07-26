@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <attr name="popupTextAlignment" format="enum">
+        <enum name="start" value="0" />
+        <enum name="end" value="1" />
+        <enum name="center" value="2" />
+    </attr>
+
     <declare-styleable name="XSpinner">
         <attr
             name="arrowTint"
