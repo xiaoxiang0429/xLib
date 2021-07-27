@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">XLib</string>
+
+
+    <string-array name="testEntries">
+        <item>销售</item>
+        <item>赠送</item>
+        <item>兑换</item>
+        <item>白给</item>
+    </string-array>
 </resources>
