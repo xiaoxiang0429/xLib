@@ -7,5 +7,5 @@ package com.xiaoxiang.xspinner;
  * description：
  */
 public interface OnSpinnerSelectListener<T> {
-    void onSpinnerSelect(XSpinner spinner, int position);
+    void onSpinnerSelect(XSpinner spinner, T item, int position);
 }

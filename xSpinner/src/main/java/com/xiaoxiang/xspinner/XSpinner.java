@@ -36,9 +36,7 @@ import java.util.List;
  * description：
  */
 public class XSpinner extends AppCompatTextView {
-    private int backgroundSelector;
     private AttachListPopupView attachListPopupView;
-    private int selectPosition;
     private OnSpinnerSelectListener onSpinnerSelectListener;
     private String[] spinnerStr;
     final private List<Object> dataSource = new ArrayList<>();
@@ -77,10 +75,6 @@ public class XSpinner extends AppCompatTextView {
         setPadding(defaultPadding, defaultPadding, defaultPadding, defaultPadding);
         setClickable(true);
 
-
-        backgroundSelector = typedArray.getResourceId(R.styleable.XSpinner_backgroundSelector, R.drawable.xspinner_selector);
-        setBackgroundResource(backgroundSelector);
-
         bindItemLayoutId = typedArray.getResourceId(R.styleable.XSpinner_itemLayoutId, R.layout._xspinner_item);
 
         textColor = typedArray.getColor(R.styleable.XSpinner_textTint, getDefaultTextColor(context));
@@ -109,15 +103,15 @@ public class XSpinner extends AppCompatTextView {
                         /*if (position >= selectPosition && position < dataSource.size()) {
                             position++;
                         }*/
-                        selectPosition = position;
+//                        selectPosition = position;
 
                         if (onSpinnerSelectListener != null) {
-                            onSpinnerSelectListener.onSpinnerSelect(XSpinner.this, position);
+                            onSpinnerSelectListener.onSpinnerSelect(XSpinner.this, dataSource.get(position), position);
                         }
 
                         setText(spinnerStr[position]);
                     }
-                }, 0, bindItemLayoutId)
+                }, R.layout._xspinner_list_layout, bindItemLayoutId)
         ;
 
         typedArray.recycle();
@@ -149,7 +143,8 @@ public class XSpinner extends AppCompatTextView {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if (isEnabled() && event.getAction() == MotionEvent.ACTION_UP) {
-            if (!attachListPopupView.isShow() && dataSource.size() > 0) {
+            if (!attachListPopupView.isShow() && spinnerStr.length > 0) {
+                attachListPopupView.setStringData(spinnerStr, null);
                 attachListPopupView.show();
             } else {
                 attachListPopupView.dismiss();

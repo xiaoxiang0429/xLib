@@ -17,7 +17,7 @@
         <attr name="popupTextAlignment" />
         <attr name="entries" format="reference" />
 
-        <attr name="itemLayoutId" format="integer" />
+        <attr name="itemLayoutId" format="reference" />
 
 
     </declare-styleable>
