@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        XSpinner xSpinner = findViewById(R.id.xSpinner);
+        XSpinner xSpinner = findViewById(R.id.sp_sale_type);
         xSpinner.setOnSpinnerSelectListener(new OnSpinnerSelectListener() {
             @Override
             public void onSpinnerSelect(XSpinner spinner, int position) {

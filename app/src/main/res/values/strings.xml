@@ -3,9 +3,9 @@
 
 
     <string-array name="testEntries">
-        <item>java</item>
-        <item>kotlin</item>
-        <item>c</item>
-        <item>c++</item>
+        <item>销售</item>
+        <item>赠送</item>
+        <item>兑换</item>
+        <item>白给</item>
     </string-array>
 </resources>

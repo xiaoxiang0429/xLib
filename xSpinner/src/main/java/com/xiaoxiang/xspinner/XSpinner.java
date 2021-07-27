@@ -6,6 +6,7 @@ import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -19,7 +20,6 @@ import androidx.core.content.ContextCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 
 import com.lxj.xpopup.XPopup;
-import com.lxj.xpopup.animator.PopupAnimator;
 import com.lxj.xpopup.enums.PopupAnimation;
 import com.lxj.xpopup.enums.PopupPosition;
 import com.lxj.xpopup.impl.AttachListPopupView;
@@ -44,6 +44,8 @@ public class XSpinner extends AppCompatTextView {
     final private List<Object> dataSource = new ArrayList<>();
 
     private int textColor;
+
+    private int bindItemLayoutId;
 
     private Drawable arrowDrawable;
     private boolean isArrowHidden;
@@ -76,15 +78,19 @@ public class XSpinner extends AppCompatTextView {
         setClickable(true);
 
 
-//        backgroundSelector = typedArray.getResourceId(R.styleable.XSpinner_backgroundSelector, R.drawable.selector);
-//        setBackgroundResource(backgroundSelector);
+        backgroundSelector = typedArray.getResourceId(R.styleable.XSpinner_backgroundSelector, R.drawable.xspinner_selector);
+        setBackgroundResource(backgroundSelector);
+
+        bindItemLayoutId = typedArray.getResourceId(R.styleable.XSpinner_itemLayoutId, R.layout._xspinner_item);
 
         textColor = typedArray.getColor(R.styleable.XSpinner_textTint, getDefaultTextColor(context));
         setTextColor(textColor);
 
         isArrowHidden = typedArray.getBoolean(R.styleable.XSpinner_hideArrow, false);
         arrowDrawableTint = typedArray.getColor(R.styleable.XSpinner_arrowTint, getResources().getColor(android.R.color.black));
-        arrowDrawableResId = typedArray.getResourceId(R.styleable.XSpinner_arrowDrawable, R.drawable.arrow);
+        arrowDrawableResId = typedArray.getResourceId(R.styleable.XSpinner_arrowDrawable, R.drawable.xspinner_arrow);
+
+        Log.e("width", "width==" + getWidth() + "**" + getMeasuredWidth() + "**" + getMaxWidth());
 
         CharSequence[] entries = typedArray.getTextArray(R.styleable.XSpinner_entries);
         if (entries != null) {
@@ -100,9 +106,9 @@ public class XSpinner extends AppCompatTextView {
                 .asAttachList(spinnerStr, null, new OnSelectListener() {
                     @Override
                     public void onSelect(int position, String text) {
-                        if (position >= selectPosition && position < dataSource.size()) {
+                        /*if (position >= selectPosition && position < dataSource.size()) {
                             position++;
-                        }
+                        }*/
                         selectPosition = position;
 
                         if (onSpinnerSelectListener != null) {
@@ -111,10 +117,18 @@ public class XSpinner extends AppCompatTextView {
 
                         setText(spinnerStr[position]);
                     }
-                })
+                }, 0, bindItemLayoutId)
         ;
 
         typedArray.recycle();
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        if (attachListPopupView != null) {
+            attachListPopupView.popupInfo.popupWidth = getMeasuredWidth();
+        }
     }
 
     public <T> void bindDataSource(List<T> list, SpinnerTextFormatter<T> spinnerTextFormatter) {
